@@ -3,6 +3,6 @@
 <module rename-to="GwtSpringDemo">
 	<inherits name="com.google.gwt.user.User" />
 	<source path="client" />
-	<entry-point
-		class="co.davidwelch.test.GwtSpringDemo.gwt.client.MainEntryPoint" />
+	<entry-point class="co.davidwelch.test.GwtSpringDemo.gwt.client.MainEntryPoint" />
+	<inherits name="com.google.web.bindery.autobean.AutoBean" />
 </module>

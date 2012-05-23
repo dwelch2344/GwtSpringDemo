@@ -34,7 +34,7 @@ public class HomeController {
 		return result;
 	}
 	
-	@RequestMapping(value="/test2.json", method=RequestMethod.GET)
+	@RequestMapping(value="/test2.gwt-json", method=RequestMethod.GET)
 	public @ResponseBody Person personTest(){
 		Address a = new Address();
 		a.setStreet("123 Spooner Street");
