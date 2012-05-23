@@ -12,14 +12,14 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<filter>
+	<!-- <filter>
 		<filter-name>jsonFilter</filter-name>
-		<filter-class>co.davidwelch.test.GwtSpringDemo.filter.GwtJsonFilter</filter-class>
+		<filter-class>co.davidwelch.test.GwtSpringDemo.filter.GwtJsonpFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>jsonFilter</filter-name>
 		<url-pattern>*.gwt-json</url-pattern>
-	</filter-mapping>
+	</filter-mapping> -->
 
 	<!-- Enables Spring Security -->
 	<filter>

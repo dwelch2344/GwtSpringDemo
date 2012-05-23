@@ -2,8 +2,8 @@ package co.davidwelch.test.GwtSpringDemo.gwt.client;
 
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IAddress;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IPerson;
-import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.DataService;
-import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.DataService.Callback;
+import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.AbstractDataService.Callback;
+import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.DataServiceImpl;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.util.MyFactory;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -24,8 +24,8 @@ public class MainEntryPoint implements EntryPoint {
 	}
 
 	public void test3(){
-		DataService service = new DataService();
-		service.getPerson(new Callback<IPerson>() {
+		DataServiceImpl service = new DataServiceImpl();
+		service.getPerson(new Callback<IPerson>(IPerson.class) {
 			
 			@Override
 			public void onComplete(IPerson t) {
