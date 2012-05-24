@@ -9,14 +9,14 @@ import com.google.web.bindery.autobean.shared.AutoBeanFactory;
 
 /**
  * The backbone for the Gwt + SpringMvc Json communication. Implementations should extend this class and provide methods to target specific 
- * controller endpoints by delegating to the {@link AbstractDataService#getRequest(String, JsonCallback)} method as appropriate.
+ * controller endpoints by delegating to the {@link AbstractJsonService#getRequest(String, JsonCallback)} method as appropriate.
  * 
- * See {@link DataServiceImpl} for a simple example.
+ * See {@link JsonServiceImpl} for a simple example.
  * 
  * @author dwelch
  *
  */
-public abstract class AbstractDataService {
+public abstract class AbstractJsonService {
 
 	
 
@@ -24,7 +24,7 @@ public abstract class AbstractDataService {
 	private final AutoBeanFactory factory;
 	private Map<Integer, JsonCallback<? extends Object>> callbacks = new HashMap<Integer, JsonCallback<? extends Object>>();
 	
-	public AbstractDataService(AutoBeanFactory factory) {
+	public AbstractJsonService(AutoBeanFactory factory) {
 		super();
 		this.factory = factory;
 	}
@@ -51,7 +51,7 @@ public abstract class AbstractDataService {
 	private native void getNativeRequest(Integer callNum, String url)/*-{
 		var instance = this;
 		var test = function(data){ 
-			instance.@co.davidwelch.test.GwtSpringDemo.gwt.client.svc.AbstractDataService::onDataReceived(Ljava/lang/Integer;Ljava/lang/String;)( callNum, JSON.stringify(data) );
+			instance.@co.davidwelch.test.GwtSpringDemo.gwt.client.svc.AbstractJsonService::onDataReceived(Ljava/lang/Integer;Ljava/lang/String;)( callNum, JSON.stringify(data) );
 		};
 		$wnd.$.get(url, test);
 	}-*/;

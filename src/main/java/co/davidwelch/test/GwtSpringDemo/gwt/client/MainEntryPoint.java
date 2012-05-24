@@ -2,7 +2,7 @@ package co.davidwelch.test.GwtSpringDemo.gwt.client;
 
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IAddress;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IPerson;
-import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.DataServiceImpl;
+import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.JsonServiceImpl;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.JsonCallback;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.util.MyFactory;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.view.PersonView;
@@ -23,7 +23,7 @@ public class MainEntryPoint implements EntryPoint {
 	}
 
 	public void makeJsonCall(){
-		DataServiceImpl service = new DataServiceImpl();
+		JsonServiceImpl service = new JsonServiceImpl();
 		service.getPerson(new JsonCallback<IPerson>(IPerson.class) {
 			
 			@Override

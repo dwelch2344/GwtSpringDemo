@@ -7,12 +7,12 @@ import com.google.gwt.core.client.GWT;
 import com.google.web.bindery.autobean.shared.AutoBeanFactory;
 
 /**
- * A simple implementation of {@link AbstractDataService} that supplies it our very-basic 
+ * A simple implementation of {@link AbstractJsonService} that supplies it our very-basic 
  * {@link AutoBeanFactory} implementation.
  */
-public class DataServiceImpl extends AbstractDataService{
+public class JsonServiceImpl extends AbstractJsonService{
 	
-	public DataServiceImpl() {
+	public JsonServiceImpl() {
 		super( (AutoBeanFactory) GWT.create(MyFactory.class) );
 	}
 	
