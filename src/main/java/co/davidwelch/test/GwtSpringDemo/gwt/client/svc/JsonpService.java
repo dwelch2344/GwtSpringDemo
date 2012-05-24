@@ -25,7 +25,7 @@ public class JsonpService {
 	
 	public void getPerson(Callback<IPerson> callback){
 		this.cb = callback;
-		String payload = getRequest();
+		getRequest();
 		
 		dataCB = new Callback<String>() {
 
@@ -44,14 +44,12 @@ public class JsonpService {
 		dataCB.onComplete(data);
 	}
 	
-	public native String getRequest()/*-{
+	public native void getRequest()/*-{
 		var test, instance = this;
 		$wnd.gwtJsonCallback = test = function(data){ 
 			console.log("DONE: ", data, instance);
-			instance.@co.davidwelch.test.GwtSpringDemo.gwt.client.svc.AbstractDataService::onDataReceived(Ljava/lang/String;)( JSON.stringify(data) );
+			instance.@co.davidwelch.test.GwtSpringDemo.gwt.client.svc.JsonpService::onDataReceived(Ljava/lang/String;)( JSON.stringify(data) );
 		};
 		$wnd.$.getJSON('http://localhost:8080/GwtSpringDemo/test2.gwt-json?callback=?', test);
-		
-		return "hi";
 	}-*/;
 }

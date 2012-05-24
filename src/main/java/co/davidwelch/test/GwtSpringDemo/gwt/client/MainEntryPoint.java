@@ -14,16 +14,14 @@ import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 
 public class MainEntryPoint implements EntryPoint {
 
-	private String test = "{\"address\":{\"postalCode\":\"84109\",\"street\":\"3167 S 2700 E\",\"city\":\"SLC\"},\"name\":\"Jimbo Jones\"}";
-	
 	private MyFactory factory = GWT.create(MyFactory.class);
 	
 	@Override
 	public void onModuleLoad() {
-		test3();
+		makeJsonCall();
 	}
 
-	public void test3(){
+	public void makeJsonCall(){
 		DataServiceImpl service = new DataServiceImpl();
 		service.getPerson(new Callback<IPerson>(IPerson.class) {
 			
@@ -33,15 +31,13 @@ public class MainEntryPoint implements EntryPoint {
 			}
 		});
 	}
+
 	
-	public void test2(){
-		AutoBean<IPerson> bean = AutoBeanCodex.decode(factory, IPerson.class, test);
-	    IPerson p = bean.as();
-	    
-	    System.out.println(p.getName() + " lives in " + p.getAddress().getCity());
-	}
-	
-	public void test1(){
+	/**
+	 * Just an example of getting a JSON representation from our beans.
+	 * @return
+	 */
+	public String getJsonFromBean(){
 		AutoBean<IAddress> abean = factory.address();
 		IAddress address = abean.as();
 		
@@ -55,7 +51,7 @@ public class MainEntryPoint implements EntryPoint {
 		p.setName("Jimbo Jones");
 		p.setAddress(address);
 		
-		
-		System.out.println(AutoBeanCodex.encode(pbean).getPayload());
+		String json = AutoBeanCodex.encode(pbean).getPayload();
+		return json;
 	}
 }
