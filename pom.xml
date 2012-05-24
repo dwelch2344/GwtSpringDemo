@@ -14,7 +14,6 @@
 		<org.springframework-version>3.0.5.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
-		<force.sdk.version>22.0.7-BETA</force.sdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -142,11 +141,6 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.force.sdk</groupId>
-			<artifactId>force-springsecurity</artifactId>
-			<version>${force.sdk.version}</version>
-		</dependency>
 
 		<!-- AspectJ -->
 		<dependency>
@@ -155,19 +149,6 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
-		<!-- Database.com -->
-
-		<dependency>
-			<groupId>com.force.sdk</groupId>
-			<artifactId>force-jpa</artifactId>
-			<version>${force.sdk.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.datanucleus</groupId>
-			<artifactId>datanucleus-core</artifactId>
-			<version>2.2.3</version>
-			<scope>runtime</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.datanucleus</groupId>
 			<artifactId>datanucleus-jpa</artifactId>
@@ -242,14 +223,6 @@
 
 	</dependencies>
 
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>DataNucleus_2</id>
-			<url>http://www.datanucleus.org/downloads/maven2/</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<build>
 
 		<plugins>
@@ -272,53 +245,6 @@
 						<goals>
 							<goal>integration-test</goal>
 							<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.datanucleus</groupId>
-				<artifactId>maven-datanucleus-plugin</artifactId>
-				<version>2.1.0-release</version>
-				<dependencies>
-					<dependency>
-						<groupId>org.datanucleus</groupId>
-						<artifactId>datanucleus-core</artifactId>
-						<version>2.2.3</version>
-
-						<scope>runtime</scope>
-					</dependency>
-					<dependency>
-						<groupId>org.datanucleus</groupId>
-						<artifactId>datanucleus-enhancer</artifactId>
-						<version>2.1.0-release</version>
-						<scope>runtime</scope>
-					</dependency>
-					<dependency>
-						<groupId>org.datanucleus</groupId>
-						<artifactId>datanucleus-rdbms</artifactId>
-						<version>2.1.0-release</version>
-						<scope>runtime</scope>
-						<optional>true</optional>
-					</dependency>
-
-					<dependency>
-						<groupId>org.datanucleus</groupId>
-						<artifactId>datanucleus-jpa</artifactId>
-						<version>2.1.6</version>
-						<scope>runtime</scope>
-						<optional>true</optional>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<api>JPA</api>
-					<verbose>true</verbose>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>enhance</goal>
 						</goals>
 					</execution>
 				</executions>
