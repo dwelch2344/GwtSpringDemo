@@ -2,7 +2,11 @@ This project is a simple proof of concept showing how we can isolate GWT to the 
 easily consume Spring MVC Json endpoints via jQuery (at least for the moment).
 
 The major components: 
+
 * Server-side entities / models, which can be JPA annotated or whatever you want. The only thing that this technique requires is that they have "Pojo" getters & setters and implement the next item 
+
 * GWT client-side interfaces (that are implemented by your server-side models) that list your getters & setters. These will be used exclusively on the client.
+
 * A interface that extends AutoBeanFactory with simple declarations for each of your bean interfaces.
+
 * Your service implementations that extend AbstractJsonService to create methods for accessing your Spring MVC endpoints. AbstractJsonService does the heavy lifting, all your services have to do is expose methods with appropriately-typed Callback's and supply your AutoBeanFactory implementation.
