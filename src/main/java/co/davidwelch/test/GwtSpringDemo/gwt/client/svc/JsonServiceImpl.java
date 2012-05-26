@@ -1,5 +1,6 @@
 package co.davidwelch.test.GwtSpringDemo.gwt.client.svc;
 
+import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IAddress;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IPerson;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.util.MyFactory;
 
@@ -25,4 +26,8 @@ public class JsonServiceImpl extends AbstractJsonService{
 		GWT.log("Made call for a person using call ID: " + callNumber);
 	}
 
+	public void postAddress(IAddress address, JsonCallback<IPerson> callback){
+		Integer callNumber = postRequest("http://localhost:8080/GwtSpringDemo/test-post.gwt-json", callback, address);
+		GWT.log("Made call for a post for an address using call ID: " + callNumber);
+	}
 }

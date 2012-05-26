@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
+import com.google.web.bindery.autobean.shared.AutoBean;
 import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 import com.google.web.bindery.autobean.shared.AutoBeanFactory;
+import com.google.web.bindery.autobean.shared.AutoBeanUtils;
 
 /**
  * The backbone for the Gwt + SpringMvc Json communication. Implementations should extend this class and provide methods to target specific 
@@ -38,6 +40,22 @@ public abstract class AbstractJsonService {
 		callNumber++;
 		return result;
 	}
+	
+	protected Integer postRequest(String url, JsonCallback<?> callback, Object param){
+		String paramJson = null;
+		if(param != null){
+			AutoBean<?> bean = AutoBeanUtils.getAutoBean(param);
+			if(bean != null){
+				paramJson = AutoBeanCodex.encode(bean).getPayload();
+			}
+		}
+		
+		callbacks.put(callNumber, callback); 
+		postNativeRequest(callNumber, url, paramJson);
+		Integer result = callNumber;
+		callNumber++;
+		return result;
+	}
 
 	private void onDataReceived(Integer callNum, String data){
 		GWT.log("Received response for call number " + callNum + ": " + data);
@@ -54,5 +72,28 @@ public abstract class AbstractJsonService {
 			instance.@co.davidwelch.test.GwtSpringDemo.gwt.client.svc.AbstractJsonService::onDataReceived(Ljava/lang/Integer;Ljava/lang/String;)( callNum, JSON.stringify(data) );
 		};
 		$wnd.$.get(url, test);
+	}-*/;
+	
+	private native void postNativeRequest(Integer callNum, String url, String paramJson)/*-{
+		var instance = this;
+		var test = function(data){ 
+			instance.@co.davidwelch.test.GwtSpringDemo.gwt.client.svc.AbstractJsonService::onDataReceived(Ljava/lang/Integer;Ljava/lang/String;)( callNum, JSON.stringify(data) );
+		};
+		if( paramJson ){
+			var config = {
+				type: 'POST',
+				url: url, 
+				data : paramJson,
+				dataType: 'json',
+				contentType: "application/json", 
+				success: test
+			};
+			console.log(config);
+			$wnd.$.ajax(config);
+		}else{
+			$wnd.$.post(url, test);
+		}
+		
+		
 	}-*/;
 }

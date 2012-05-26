@@ -19,12 +19,32 @@ public class MainEntryPoint implements EntryPoint {
 	
 	@Override
 	public void onModuleLoad() {
-		makeJsonCall();
+		// makeJsonCall();
+		makeJsonPost();
 	}
 
 	public void makeJsonCall(){
 		JsonServiceImpl service = new JsonServiceImpl();
 		service.getPerson(new JsonCallback<IPerson>(IPerson.class) {
+			
+			@Override
+			public void onComplete(IPerson person) {
+				RootPanel.get().add( new PersonView(person) );
+			}
+		});
+	}
+	
+	public void makeJsonPost(){
+		AutoBean<IAddress> abean = factory.address();
+		IAddress address = abean.as();
+		
+		address.setStreet("ClientVille");
+		address.setCity("SLC");
+		address.setPostalCode("84109");
+		
+		
+		JsonServiceImpl service = new JsonServiceImpl();
+		service.postAddress(address, new JsonCallback<IPerson>(IPerson.class) {
 			
 			@Override
 			public void onComplete(IPerson person) {
