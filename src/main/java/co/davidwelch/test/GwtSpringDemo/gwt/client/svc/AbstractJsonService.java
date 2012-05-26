@@ -21,21 +21,24 @@ import com.google.web.bindery.autobean.shared.AutoBeanUtils;
 public abstract class AbstractJsonService {
 
 	
-
+	private final String baseUrl;
 	private Integer callNumber = 1;
 	private final AutoBeanFactory factory;
 	private Map<Integer, JsonCallback<? extends Object>> callbacks = new HashMap<Integer, JsonCallback<? extends Object>>();
 	
 	public AbstractJsonService(AutoBeanFactory factory) {
-		super();
-		this.factory = factory;
+		this(factory, GWT.getHostPageBaseURL());
 	}
 	
+	public AbstractJsonService(AutoBeanFactory factory, String baseUrl) {
+		super();
+		this.factory = factory;
+		this.baseUrl = baseUrl == null ? "" : baseUrl;
+	}
 	
-
 	protected Integer getRequest(String url, JsonCallback<?> callback){
 		callbacks.put(callNumber, callback);
-		getNativeRequest(callNumber, url);
+		getNativeRequest(callNumber, baseUrl + url);
 		Integer result = callNumber;
 		callNumber++;
 		return result;
@@ -51,7 +54,7 @@ public abstract class AbstractJsonService {
 		}
 		
 		callbacks.put(callNumber, callback); 
-		postNativeRequest(callNumber, url, paramJson);
+		postNativeRequest(callNumber, baseUrl + url, paramJson);
 		Integer result = callNumber;
 		callNumber++;
 		return result;

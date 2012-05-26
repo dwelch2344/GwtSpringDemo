@@ -22,12 +22,12 @@ public class JsonServiceImpl extends AbstractJsonService{
 	 * @param callback
 	 */
 	public void getPerson(JsonCallback<IPerson> callback){
-		Integer callNumber = getRequest("http://localhost:8080/GwtSpringDemo/test2.gwt-json", callback);
+		Integer callNumber = getRequest("test2.gwt-json", callback);
 		GWT.log("Made call for a person using call ID: " + callNumber);
 	}
 
 	public void postAddress(IAddress address, JsonCallback<IPerson> callback){
-		Integer callNumber = postRequest("http://localhost:8080/GwtSpringDemo/test-post.gwt-json", callback, address);
+		Integer callNumber = postRequest("test-post.gwt-json", callback, address);
 		GWT.log("Made call for a post for an address using call ID: " + callNumber);
 	}
 }
