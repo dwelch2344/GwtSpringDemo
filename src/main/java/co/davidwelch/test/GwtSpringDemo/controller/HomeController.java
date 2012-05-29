@@ -1,8 +1,8 @@
 package co.davidwelch.test.GwtSpringDemo.controller;
 
-import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -60,5 +60,21 @@ public class HomeController {
 		result.setAddress(fromClient);
 		return result;
 	}
+	
+	private List<Person> people = new ArrayList<Person>();
+	
+	@RequestMapping(value="test-get-people.gwt-json", method=RequestMethod.GET)
+	public @ResponseBody List<Person> getPersonList(){
+		return people;
+	}
+	
+	@RequestMapping(value="test-post-people.gwt-json", method=RequestMethod.POST)
+	public @ResponseBody List<Person> postPersonList(@RequestBody List<Person> people){
+		logger.info("Received new list for people. " + people.size() + " entries.");
+		this.people = people;
+		return people;
+	}
+	
+	
 }
 

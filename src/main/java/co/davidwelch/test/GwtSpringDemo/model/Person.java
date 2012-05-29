@@ -1,5 +1,7 @@
 package co.davidwelch.test.GwtSpringDemo.model;
 
+import org.springframework.security.config.authentication.AuthenticationManagerFactoryBean;
+
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IAddress;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IPerson;
 

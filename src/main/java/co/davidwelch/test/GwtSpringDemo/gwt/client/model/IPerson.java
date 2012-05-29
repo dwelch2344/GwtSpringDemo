@@ -3,12 +3,12 @@ package co.davidwelch.test.GwtSpringDemo.gwt.client.model;
 
 public interface IPerson {
 
-	public abstract IAddress getAddress();
+	IAddress getAddress();
 
-	public abstract void setAddress(IAddress address);
+	void setAddress(IAddress address);
 
-	public abstract String getName();
+	String getName();
 
-	public abstract void setName(String name);
+	void setName(String name);
 
 }

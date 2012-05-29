@@ -5,6 +5,7 @@ import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IPerson;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.JsonServiceImpl;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.svc.JsonCallback;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.util.MyFactory;
+import co.davidwelch.test.GwtSpringDemo.gwt.client.view.MainView;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.view.PersonView;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -20,7 +21,10 @@ public class MainEntryPoint implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		// makeJsonCall();
-		makeJsonPost();
+		//makeJsonPost();
+		
+		MainView view = new MainView();
+		RootPanel.get().add( view );
 	}
 
 	public void makeJsonCall(){

@@ -1,6 +1,8 @@
 package co.davidwelch.test.GwtSpringDemo.gwt.client.svc;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
@@ -47,9 +49,30 @@ public abstract class AbstractJsonService {
 	protected Integer postRequest(String url, JsonCallback<?> callback, Object param){
 		String paramJson = null;
 		if(param != null){
-			AutoBean<?> bean = AutoBeanUtils.getAutoBean(param);
-			if(bean != null){
-				paramJson = AutoBeanCodex.encode(bean).getPayload();
+			if(param instanceof Collection){
+				
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("[");
+				
+				Collection<?> col = ((Collection<?>) param);
+				Iterator<?> itr = col.iterator();
+				while(itr.hasNext()){
+					AutoBean<?> bean = AutoBeanUtils.getAutoBean(itr.next());
+					if(bean != null){
+						sb.append( AutoBeanCodex.encode(bean).getPayload() );
+					}
+					if(itr.hasNext()){
+						sb.append(", ");
+					}
+				}
+				sb.append("]");
+				paramJson = sb.toString();
+			}else{
+				AutoBean<?> bean = AutoBeanUtils.getAutoBean(param);
+				if(bean != null){
+					paramJson = AutoBeanCodex.encode(bean).getPayload();
+				}
 			}
 		}
 		
@@ -71,15 +94,15 @@ public abstract class AbstractJsonService {
 	
 	private native void getNativeRequest(Integer callNum, String url)/*-{
 		var instance = this;
-		var test = function(data){ 
+		var callback = function(data){ 
 			instance.@co.davidwelch.test.GwtSpringDemo.gwt.client.svc.AbstractJsonService::onDataReceived(Ljava/lang/Integer;Ljava/lang/String;)( callNum, JSON.stringify(data) );
 		};
-		$wnd.$.get(url, test);
+		$wnd.$.get(url, callback);
 	}-*/;
 	
 	private native void postNativeRequest(Integer callNum, String url, String paramJson)/*-{
 		var instance = this;
-		var test = function(data){ 
+		var callback = function(data){ 
 			instance.@co.davidwelch.test.GwtSpringDemo.gwt.client.svc.AbstractJsonService::onDataReceived(Ljava/lang/Integer;Ljava/lang/String;)( callNum, JSON.stringify(data) );
 		};
 		if( paramJson ){
@@ -89,12 +112,11 @@ public abstract class AbstractJsonService {
 				data : paramJson,
 				dataType: 'json',
 				contentType: "application/json", 
-				success: test
+				success: callback
 			};
-			console.log(config);
 			$wnd.$.ajax(config);
 		}else{
-			$wnd.$.post(url, test);
+			$wnd.$.post(url, callback);
 		}
 		
 		

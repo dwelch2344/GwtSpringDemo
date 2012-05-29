@@ -1,5 +1,7 @@
 package co.davidwelch.test.GwtSpringDemo.gwt.client.svc;
 
+import java.util.List;
+
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IAddress;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.model.IPerson;
 import co.davidwelch.test.GwtSpringDemo.gwt.client.util.MyFactory;
@@ -29,5 +31,15 @@ public class JsonServiceImpl extends AbstractJsonService{
 	public void postAddress(IAddress address, JsonCallback<IPerson> callback){
 		Integer callNumber = postRequest("test-post.gwt-json", callback, address);
 		GWT.log("Made call for a post for an address using call ID: " + callNumber);
+	}
+	
+	public void postListOfPeople(List<IPerson> people, JsonCallback<List<IPerson>> callback){
+		Integer callNumber = postRequest("test-post-people.gwt-json", callback, people);
+		GWT.log("Made call for a post for all people using call ID: " + callNumber);
+	}
+	
+	public void getListOfPeople(JsonCallback<List<IPerson>> callback){
+		Integer callNumber = getRequest("test-get-people.gwt-json", callback);
+		GWT.log("Made call for a get for all people using call ID: " + callNumber);
 	}
 }

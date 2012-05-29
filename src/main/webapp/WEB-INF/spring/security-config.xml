@@ -11,9 +11,9 @@
         	http://media.developerforce.com/schema/force-springsecurity-1.2.xsd">
     
     <!-- SFDC OAuth security config -->
-    <fss:oauth logout-from-force-dot-com="true">
+    <!-- <fss:oauth logout-from-force-dot-com="true">
     	<fss:connectionName name="forceDatabase"/>
-    </fss:oauth>
+    </fss:oauth> -->
     
        
 	<!-- Configure Spring Security -->
@@ -30,8 +30,12 @@
 		 -->
 
 	    <!-- sets this as the authentication filter over the default -->
-	    <security:custom-filter position="FORM_LOGIN_FILTER" ref="authenticationFilter"/>
-	    <security:custom-filter position="LOGOUT_FILTER" ref="logoutFilter"/>
+	    <!-- <security:custom-filter position="FORM_LOGIN_FILTER" ref="authenticationFilter"/>
+	    <security:custom-filter position="LOGOUT_FILTER" ref="logoutFilter"/> -->
 	</security:http>
-
+	
+	<bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="loginFormUrl" value="/login"/>
+	</bean>
+	
 </beans>

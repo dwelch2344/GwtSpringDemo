@@ -3,7 +3,9 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:my="urn:import:co.davidwelch.test.GwtSpringDemo.gwt.client.view">
 	<g:HTMLPanel>
-		<div ui:field="name"/>
-		<my:AddressView ui:field="address" />
+		<div style="width: 200px; padding: 15px; margin-bottom: 5px; background-color: #efefef; border: 1px solid #999; border-radius: 3px">
+			<div ui:field="name"/>
+			<my:AddressView ui:field="address" />
+		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

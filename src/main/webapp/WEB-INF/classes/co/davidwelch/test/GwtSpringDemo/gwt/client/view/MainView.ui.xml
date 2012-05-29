@@ -1,0 +1,26 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:my="urn:import:co.davidwelch.test.GwtSpringDemo.gwt.client.view">
+
+	<g:HTMLPanel>
+		<div style="width: 200px; padding: 15px; background-color: #efefef; border: 1px solid #999; border-radius: 3px; float: left">
+			<table border="0">
+				<tr><td>Name</td><td> <g:TextBox ui:field="name"/> </td></tr>
+				<tr><td>Address</td><td> 
+					<g:TextBox ui:field="street" width="10"/> <br/>
+					<g:TextBox ui:field="street2" width="10"/> <br/>
+				</td></tr>
+				<tr><td>City</td><td> <g:TextBox ui:field="city"/> </td></tr>
+				<tr><td>Providence</td><td> <g:TextBox ui:field="providence"/> </td></tr>
+				<tr>
+					<td> <g:Button ui:field="sendButton" text="Send"/> </td>
+					<td> <g:Button ui:field="loadButton" text="Load"/> </td>
+					<td style="text-align: right"> <g:Button ui:field="addButton" text="Add to List" /></td>
+				</tr>
+			</table>
+		</div>
+		<g:VerticalPanel ui:field="panel"/>
+	
+	</g:HTMLPanel>
+</ui:UiBinder> 
