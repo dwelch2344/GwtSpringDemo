@@ -28,6 +28,12 @@ public class HomeController {
 	    	logger.info("requesting home");
 		return "home";
 	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login() {
+	    	logger.info("requesting login");
+		return "login";
+	}
 
 	
 	@RequestMapping(value="/test", method=RequestMethod.GET)

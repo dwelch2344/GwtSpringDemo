@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:fss="http://www.salesforce.com/schema/springsecurity"
+	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.salesforce.com/schema/springsecurity 
-        	http://media.developerforce.com/schema/force-springsecurity-1.2.xsd">
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        	">
     
     <!-- SFDC OAuth security config -->
     <!-- <fss:oauth logout-from-force-dot-com="true">
@@ -19,15 +19,27 @@
 	<!-- Configure Spring Security -->
 	<!-- use-expressions and hasRole only needed if jsp tags are used. 
 		If not using jsp tags you can omit the use-expressions property and set access="ROLE_USER" on the intercept-url tags -->
-	<security:http entry-point-ref="authenticationProcessingFilterEntryPoint" use-expressions="true">
-
+	
+	<bean id="org.springframework.security.authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+		<property name="providers">
+			<util:list>
+				<bean class="co.davidwelch.test.GwtSpringDemo.security.HardCodedUserDetailsAuthentcationProvider">
+					<constructor-arg index="0" value="dwelch"/>
+					<constructor-arg index="1" value="password"/>
+				</bean>
+			</util:list>
+		</property>
+	</bean>
+	
+	<security:http entry-point-ref="authenticationProcessingFilterEntryPoint" use-expressions="true" >
+		<security:form-login login-processing-url="/doLogin"/>
 	    <security:anonymous />
 
-		<!--  Uncomment this section to enable security -->
-
-		<!-- 
+		<security:intercept-url pattern="/login" filters="none"/>
+		<security:intercept-url pattern="/j_spring_security_check" filters="none"/>
+	    
+	    <!--  Uncomment this section to enable security -->
 	    <security:intercept-url pattern="/**" access="isAuthenticated()" />
-		 -->
 
 	    <!-- sets this as the authentication filter over the default -->
 	    <!-- <security:custom-filter position="FORM_LOGIN_FILTER" ref="authenticationFilter"/>
